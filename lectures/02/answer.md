@@ -6,15 +6,15 @@
   モデルは Qwen/Qwen3.5-0.8B、revisionは 2fc06364715b967f1860aea9cf38778875588b17。量子化なしのLoRAで学習した。
   設定は seed=42、num_train_epochs=20、warmup_steps=6、lr=0.0002、lora_r=16、lora_alpha=32、max_seq_len=512、max_new_tokens=96、do_sample=False
   
-- 自分で学習を実行したか（`executed_training_myself`）：はい / いいえ（実行できた範囲：　）
+- 自分で学習を実行したか（`executed_training_myself`）：
   はい。
   Google ColabのTesla T4でセクション0〜7を実行し、学習前評価・LoRA学習・学習後評価を行った。
   任意のセクション8も実行した。学習は40ステップ・20エポック、231秒で完了した。
   
-- 学習前：`format_rate` =　 / `content_rate` =　
+- 学習前：　
   format_rate = 0.095238（2／21問、約9.5％） / content_rate = 0.000000（0／21問、0％）
   
-- 学習後：`format_rate` =　 / `content_rate` =　
+- 学習後：
   format_rate = 1.000000（21／21問、100％） / content_rate = 0.904762（19／21問、約90.5％）
 
 - 退行した質問:
@@ -33,7 +33,7 @@
 
 ## 宿題
 
-- 取り組んだレベル：基礎 / 
+- 取り組んだレベル：基礎 
 　
 - 変えた設定やデータ：
 　`num_train_epochs` だけを20から10に変更し、セッションを再起動して上から実行した。基盤モデル・revision・データ・学習率・LoRA設定・seed・生成設定は同じにした。
