@@ -14,6 +14,7 @@ import argparse
 
 from google import genai
 from google.genai import errors
+from google.genai import types
 
 from app.config import MODEL, api_error_message, get_api_key
 
@@ -21,12 +22,23 @@ from app.config import MODEL, api_error_message, get_api_key
 DEFAULT_QUESTION = "AIE2026の講座の宿題にある「3レベル」とは何ですか？"
 
 
-def ask(question: str) -> str:
+def ask(question: str, temperature: float | None = None) -> str:
     client = genai.Client(api_key=get_api_key())
-    response = client.models.generate_content(model=MODEL, contents=question)
+    config = (
+        types.GenerateContentConfig(temperature=temperature)
+        if temperature is not None
+        else None
+    )
+    response = client.models.generate_content(
+        model=MODEL,
+        contents=question,
+        config=config,
+    )
 
-    # TODO(第1回 演習): response.usage_metadata から
-    #   入力トークン数と出力トークン数を表示してみよう（Copilotに頼んでよい）
+    usage_metadata = response.usage_metadata
+    if usage_metadata is not None:
+        print(f"[入力トークン数] {usage_metadata.prompt_token_count}")
+        print(f"[出力トークン数] {usage_metadata.candidates_token_count}")
 
     return response.text
 
@@ -34,12 +46,15 @@ def ask(question: str) -> str:
 def main() -> None:
     parser = argparse.ArgumentParser(description="素のLLMに質問する")
     parser.add_argument("question", nargs="?", default=DEFAULT_QUESTION)
+    parser.add_argument("--temperature", type=float)
     args = parser.parse_args()
 
     print(f"[model] {MODEL}")
+    temperature_label = args.temperature if args.temperature is not None else "APIの既定値"
+    print(f"[temperature] {temperature_label}")
     print(f"[質問] {args.question}\n")
     try:
-        print(ask(args.question))
+        print(ask(args.question, args.temperature))
     except errors.APIError as e:
         print(api_error_message(e.code, e.message))
         raise SystemExit(1)
