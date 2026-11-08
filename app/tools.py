@@ -7,8 +7,10 @@
 import json
 from functools import cache
 from pathlib import Path
+from uuid import uuid4
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
+LEARNING_LOG_DIR = DATA_DIR.parent / "learning_log"
 MAX_RESULTS = 3
 
 
@@ -77,3 +79,33 @@ def get_lecture_summary(lecture: int) -> str:
         available = sorted(p.stem for p in (DATA_DIR / "lectures").glob("*.md"))
         return f"第{lecture}回の要点はまだありません。用意されている回: {', '.join(available)}"
     return path.read_text(encoding="utf-8")
+
+def make_quiz(lecture: int) -> str:
+    """指定した講義回の用語から確認問題を1問作る。
+
+    確認問題や復習クイズを求められたときに使う。
+    lecture には講義回の番号を指定する。問題だけを求められたら、問題文だけを提示する。
+    """
+    terms = [entry for entry in load_glossary() if entry["lecture"] == lecture]
+    if not terms:
+        return f"第{lecture}回の用語が用語集に見つかりませんでした。"
+
+    entry = terms[0]
+    return f"問題：「{entry['term']}」とは何ですか？\n答え：{entry['definition']}"
+
+
+def save_learning_log(note: str) -> str:
+    """利用者が学習の記録を保存したいときに使う。
+
+    note には保存する学習記録の本文を指定する。
+    """
+    note = note.strip()
+    if not note:
+        return "学習記録の本文が空です。"
+
+    LEARNING_LOG_DIR.mkdir(exist_ok=True)
+    path = LEARNING_LOG_DIR / f"note-{uuid4().hex}.md"
+    with path.open("x", encoding="utf-8") as log_file:
+        log_file.write(note + "\n")
+
+    return f"学習ログを learning_log/{path.name} に保存しました。"
