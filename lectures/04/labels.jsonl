@@ -1,0 +1,10 @@
+{"id": "01", "grounding": "pass", "scope": "pass", "hint": "pass", "clarity": "pass", "lecture_mark": "pass", "unsure_flag": false, "note": ""}
+{"id": "02", "grounding": "pass", "scope": "pass", "hint": "pass", "clarity": "pass", "lecture_mark": "fail", "unsure_flag": false, "note": ""}
+{"id": "03", "grounding": "pass", "scope": "pass", "hint": "pass", "clarity": "pass", "lecture_mark": "pass", "unsure_flag": true, "note": "「ローラ」は用語集の見出しと完全一致しないが、LoRAと解釈して回答しているため、範囲は合格と判断した。"}
+{"id": "04", "grounding": "pass", "scope": "pass", "hint": "pass", "clarity": "fail", "lecture_mark": "pass", "unsure_flag": true, "note": "違いは説明されているが、内容の繰り返しがあり、少し長いと感じた。簡潔さの基準で合格にするか迷った。"}
+{"id": "05", "grounding": "fail", "scope": "pass", "hint": "pass", "clarity": "pass", "lecture_mark": "pass", "unsure_flag": true, "note": "用語集にないと伝えているが、一般的な説明を加えている。また、「用語集からは分からない」としながら第4回と表示しており、その根拠が分からない。"}
+{"id": "06", "grounding": "pass", "scope": "pass", "hint": "fail", "clarity": "pass", "lecture_mark": "pass", "unsure_flag": false, "note": ""}
+{"id": "07", "grounding": "pass", "scope": "pass", "hint": "pass", "clarity": "pass", "lecture_mark": "fail", "unsure_flag": true, "note": "「講座外の質問なので『関係する回：なし』は自然だが、第N回の表示はない」"}
+{"id": "08", "grounding": "pass", "scope": "fail", "hint": "pass", "clarity": "pass", "lecture_mark": "pass", "unsure_flag": false, "note": ""}
+{"id": "09", "grounding": "pass", "scope": "pass", "hint": "pass", "clarity": "pass", "lecture_mark": "fail", "unsure_flag": true, "note": "誤送信への案内としては適切だが、回答末尾に「第N回」がないため、形式上は不合格とした。関連する回がない場合の扱いは検討したい。"}
+{"id": "10", "grounding": "fail", "scope": "pass", "hint": "pass", "clarity": "pass", "lecture_mark": "pass", "unsure_flag": true, "note": "講座は全13回なのに、第14回が存在し、今後内容が追加されるかのように回答している。回の表示は形式上あるが、内容は誤っている。"}
